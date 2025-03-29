@@ -1,0 +1,73 @@
+<div class="container">
+    <h1>Book Management</h1>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <!-- Add/Edit Book Form -->
+    <div class="form-container">
+        <h2>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h2>
+        <form #bookForm="ngForm" (ngSubmit)="isEditMode ? onUpdateBook() : onAddBook()">
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" [(ngModel)]="newBook.title" name="title" required #title="ngModel" />
+                <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                    Title is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Author:</label>
+                <input type="text" [(ngModel)]="newBook.author" name="author" required #author="ngModel" />
+                <div *ngIf="author.invalid && (author.dirty || author.touched)" class="error">
+                    Author is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ISBN:</label>
+                <input type="text" [(ngModel)]="newBook.isbn" name="isbn" required pattern="^[0-9]{3}-[0-9]{10}$" #isbn="ngModel" />
+                <div *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)" class="error">
+                    ISBN must be in the format 123-1234567890.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Publication Date:</label>
+                <input type="date" [(ngModel)]="newBook.publicationDate" name="publicationDate" required #publicationDate="ngModel" />
+                <div *ngIf="publicationDate.invalid && (publicationDate.dirty || publicationDate.touched)" class="error">
+                    Publication Date is required.
+                </div>
+            </div>
+            <button type="submit" [disabled]="bookForm.invalid">{{ isEditMode ? 'Update' : 'Add' }} Book</button>
+            <button type="button" *ngIf="isEditMode" (click)="resetForm()">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Book List -->
+    <div class="book-list">
+        <h2>Book List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Publication Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.publicationDate | date:'mediumDate' }}</td>
+                    <td>
+                        <button (click)="onEditBook(book)">Edit</button>
+                        <button (click)="onDeleteBook(book.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
