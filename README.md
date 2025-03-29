@@ -71,3 +71,103 @@ Follow these steps to set up and run the project locally.
 - **Visual Studio Code** (optional): Recommended for editing the code, with extensions for C# and Angular.
 
 ### Project Structure
+
+# Book Management App
+
+## Project Structure
+```
+BookManagementApp/
+├── backend/
+│   └── BookApi/          # ASP.NET Core backend project
+└── frontend/
+    └── BookApp/          # Angular frontend project
+```
+
+## Backend Setup
+1. Navigate to the backend folder:
+   ```bash
+   cd backend/BookApi
+   ```
+2. Restore dependencies and run the backend:
+   ```bash
+   dotnet restore
+   dotnet run
+   ```
+   The backend will start on [http://localhost:5150](http://localhost:5150) (and optionally [https://localhost:7150](https://localhost:7150) if HTTPS is enabled).
+
+3. Access the Swagger UI at [http://localhost:5150/swagger](http://localhost:5150/swagger) to test the API endpoints.
+
+## Frontend Setup
+1. Navigate to the frontend folder:
+   ```bash
+   cd frontend/BookApp
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the Angular app:
+   ```bash
+   ng serve
+   ```
+   The frontend will start on [http://localhost:4200](http://localhost:4200).
+
+## Running the Application
+- Ensure the backend is running on [http://localhost:5150](http://localhost:5150).
+- Open [http://localhost:4200](http://localhost:4200) in your browser to access the application.
+- Use the UI to:
+  - View the list of books.
+  - Add a new book.
+  - Edit an existing book.
+  - Delete a book.
+  - Test form validation by submitting invalid data (e.g., empty fields or an invalid ISBN).
+
+## Features
+- **CRUD Operations**: Add, view, update, and delete books using a RESTful API.
+- **Form Validation**: Ensures required fields are filled and ISBN follows the pattern `123-1234567890`.
+- **Error Handling**: Displays user-friendly error messages for API failures and form validation errors.
+- **Responsive UI**: Clean and professional design with a table for the book list and a form for adding/editing books.
+- **Date Formatting**: Properly handles the `publicationDate` field, displaying it in a readable format (e.g., "Apr 10, 1925") and allowing user input via a date picker.
+
+## Challenges and Solutions
+### Angular Standalone Components
+- The project initially used a traditional `NgModule` setup, but errors occurred because `AppComponent` was standalone.
+- Solution: Removed `AppModule`, used `bootstrapApplication` in `main.ts`, and directly imported `CommonModule` and `FormsModule` in `AppComponent`.
+
+### Type Mismatch for `publicationDate`
+- The `Book` interface defined `publicationDate` as a string, but it was being converted to a `Date` object, causing type errors.
+- Solution: Kept `publicationDate` as a string throughout the frontend since the `date` pipe can handle ISO strings directly.
+
+### HTTPS Certificate Issues
+- The backend initially had issues with HTTPS redirection.
+- Solution: Configured HTTPS with a development certificate (`dotnet dev-certs https --trust`), but switched to HTTP for local development to avoid certificate errors.
+
+### CORS Configuration
+- Enabled CORS in the backend to allow the frontend to make requests, ensuring seamless integration between the two.
+
+## Video Demo
+A screen recording of the application in action is provided in `BookManagementDemo.mp4`. The video demonstrates:
+- Viewing the list of books.
+- Adding a new book.
+- Editing an existing book.
+- Deleting a book.
+- Form validation (e.g., submitting an empty form or invalid ISBN).
+
+## Future Improvements
+If more time were available, the following enhancements could be made:
+- **Database Integration**: Replace the in-memory list with a database (e.g., SQL Server) for persistent storage.
+- **Confirmation Dialog for Delete**: Add a confirmation dialog before deleting a book to prevent accidental deletions.
+- **Advanced Styling**: Use a CSS framework like Bootstrap to improve the UI’s appearance and responsiveness.
+- **Unit Tests**: Add unit tests for both the backend and frontend to ensure code reliability.
+
+## Submission Details
+- **Source Code**: Available on GitHub at [https://github.com/your-username/BookManagementApp](https://github.com/your-username/BookManagementApp) (replace with actual repository URL).
+- **Video Demo**: Included as `BookManagementDemo.mp4` in the submission.
+- **Deadline**: Submitted before **March 30, 2025, at 4:00 PM**, as per the assignment requirements.
+
+## Contact Information
+For any questions or further clarification, please contact me at `20indu03@gmail.com` . I am also happy to discuss the project in more detail during the interview process.
+
+Thank you for considering my application for the **Software Engineer Intern** position at **Enhanzer**!
+
+
