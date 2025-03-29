@@ -166,7 +166,7 @@ If more time were available, the following enhancements could be made:
 - **Deadline**: Submitted before **March 30, 2025, at 4:00 PM**, as per the assignment requirements.
 
 ## Contact Information
-For any questions or further clarification, please contact me at `your-email@example.com` (replace with actual email). I am also happy to discuss the project in more detail during the interview process.
+For any questions or further clarification, please contact me at `20indu03@gmail.com` . I am also happy to discuss the project in more detail during the interview process.
 
 Thank you for considering my application for the **Software Engineer Intern** position at **Enhanzer**!
 
